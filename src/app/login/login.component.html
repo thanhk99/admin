@@ -1,0 +1,23 @@
+<div class="login">
+    <div class="container-login">
+        <div class="logo">
+            <img src="admin-logo.jpg" alt="">
+        </div>
+        <div class=" form-login">
+            <form (ngSubmit)="ngLogin()">
+                <div class="title-login">
+                    Admin Login
+                </div>
+                <div class="account input-cont">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="text" name="tk" placeholder="Account" [(ngModel)]="Account" required>
+                </div>
+                <div class="password input-cont">
+                    <i class="fa-solid fa-key"></i>
+                    <input type="text" name="mk" placeholder="Password" [(ngModel)]="Password" required>
+                </div>
+                <button class=" input-cont">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+.app-main{
+    margin-top: 7vh;
+    display: flex;
+    margin-left: 2%;
+    width: 100%;
+}
+main{
+    display: flex;
+}
