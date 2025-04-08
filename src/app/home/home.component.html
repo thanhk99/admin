@@ -29,31 +29,65 @@
             <div class="col-game card ">
                 <img src="slot777.jfif" alt="">
                 <div class="parameter">
-                    <p></p>
+                    <p><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</p>
                     <span></span>
                 </div>          
             </div>
             <div class="col-game card">
-                <img src="slot777.jfif" alt="">
+                <img src="rengreng.jfif" alt="">
+                <div class="parameter">
+                    <p><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</p>
+                    <span></span>
+                </div>
+            </div>
+            <div class="col-game card">
+                <img src="spaceman.jfif" alt="">
                 <div class="parameter">
                     <p></p>
                     <span></span>
                 </div>
             </div>
             <div class="col-game card">
-                <img src="slot777.jfif" alt="">
+                <img src="chanle.jfif" alt="">
                 <div class="parameter">
                     <p></p>
                     <span></span>
                 </div>
             </div>
-            <div class="col-game card">
-                <img src="slot777.jfif" alt="">
-                <div class="parameter">
-                    <p></p>
-                    <span></span>
-                </div>
+        </div>
+        <div class="statics-user card">
+            <div class="head-user">
+                <i class="fa-solid fa-table"></i>Dynamic Table User
             </div>
+            <div class="search-user">
+                <div id="search">
+                    <span>Tìm kiếm</span>
+                    <input type="text" name="" id="">
+                </div>
+                
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>DateTime</th>
+                        <th>Edit</th>
+                        <td><i class="fa-solid fa-trash"></i></td>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr *ngFor="let user of users">
+                        <td>{{user.id}}</td>
+                        <td>{{user.fullname}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.datetime}}</td>
+                        <td><i class="fa-solid fa-pen-to-square"></i></td>
+                        <td><input type="checkbox" name="" id=""></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

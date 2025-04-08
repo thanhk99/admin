@@ -1,10 +1,11 @@
 .side-left{
-    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 7vh;
+    width: 12vw;
     height: 93vh;
-    background-color: red;
     background-color:#FFFFFF ;
     padding: 2% 2rem;
-    margin-top: 7vh;
 }
 .side-left .nav{
     width: 100%;

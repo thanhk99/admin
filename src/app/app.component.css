@@ -1,9 +1,12 @@
 .app-main{
     margin-top: 7vh;
     display: flex;
-    margin-left: 2%;
+    margin-left: 12vw;
     width: 100%;
+    position: relative;
 }
 main{
+    position: relative;
     display: flex;
+    height: 100vh;
 }

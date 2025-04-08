@@ -1,5 +1,4 @@
 .content{
-    margin-left: 2rem;
     width: 100%;
 }
 .container{
@@ -66,4 +65,72 @@
     margin: 0 2.5%;
     height: 100%;
     border-radius: 10px;
+}
+.statics-game .col-game img{
+    width: 50%;
+    margin: 5% 25%;
+    object-fit: cover;
+    height: 50%;
+    border-radius: 10px;
+}
+.statics-game .col-game .parameter{
+    text-align: center ;
+    font-size: 20px;
+    font-weight: bold  ;
+}
+.statics-user{
+    width: 70vw;
+    height: 55vh;
+    margin: 0 7.5vw;
+}
+.statics-user .head-user{
+    font-size: 24px;
+    opacity: 0.8;
+    font-weight: bold;
+    text-align: center;
+    padding: 2% 0;
+    border-bottom: 1px solid rgba(0,0,0,0.6) ;
+}
+.statics-user .search-user{
+    padding: 2% 2%;
+}
+#search{
+    display: flex;
+    border: 1px solid rgba(0,0,0,0.6);
+    width: 20%;
+    font-size: 20px;
+    float: right;
+}
+#search input{
+    width: 70%;
+    border: none;
+    outline: none;
+    font-size: 24px;
+}
+#search span{
+    width: 40%;
+    color: white;
+    padding: 4px;
+    background-color: rgb(59, 59, 230);
+}
+table{
+    width: 100%;
+    text-align: left;
+}
+table thead tr {
+    color: #677788;
+    border: 1px solid rgba(0,0,0,0.6);
+    font-size: 24px;
+}
+table tbody{
+    vertical-align: middle;
+    height: 80%;
+    border: 1px solid;
+}
+table tbody td{
+    padding: 1% 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(0,0,0,0.75);
+    cursor: pointer;
 }
