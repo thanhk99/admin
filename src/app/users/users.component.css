@@ -64,3 +64,40 @@
 ul{
     list-style: none;
 }
+.col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 2%;
+    padding: 1%;
+    gap:2vh
+}
+.content-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 2%;
+    padding: 1%;
+    gap:2vh;
+    margin-left: 9vh;
+}
+.list-game{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 2%;
+    padding: 1%;
+    gap:2vh;
+}
+.list-game ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 2%;
+    padding: 1%;
+    gap:2vh;
+}

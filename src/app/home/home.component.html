@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-info">
                         <p>Incom Money</p>
-                        <span>{{amountIncom}}</span>
+                        <span>{{amountIncome}}</span>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="parameter">
                     <p><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</p>
                     <span></span>
-                </div>          
+                </div>
             </div>
             <div class="col-game card">
                 <img src="rengreng.jfif" alt="">
@@ -64,9 +64,9 @@
                     <span>Tìm kiếm</span>
                     <input type="text" name="" id="">
                 </div>
-                
+
             </div>
-            <table>
+            <table class="card">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -77,17 +77,44 @@
                         <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
                 </thead>
-                <tbody >
-                    <tr *ngFor="let user of users">
-                        <td>{{user.id}}</td>
-                        <td>{{user.fullname}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.datetime}}</td>
-                        <td><i class="fa-solid fa-pen-to-square"></i></td>
-                        <td><input type="checkbox" name="" id=""></td>
+                <tbody>
+                    <tr *ngFor="let user of users |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }"
+                        (click)="goToUser(user.id)" style="cursor:pointer;" [class.active]="isActive[user.id - 1]">
+                        <td>
+                            <span *ngIf="!isEditing[user.id - 1]">{{user.id}}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.id"/>
+                        </td>
+                        <td>
+                            <span *ngIf="!isEditing[user.id - 1]">{{user.fullname}}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.fullname" type="text" (click)="$event.stopPropagation()" />
+                        </td>
+                        <td>
+                            <span *ngIf="!isEditing[user.id - 1]">{{user.email}}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.email" type="text" (click)="$event.stopPropagation()"/>
+                        </td>
+                        <td>
+                            <span *ngIf="!isEditing[user.id - 1]">{{user.datetime}}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.datetime" type="text" (click)="$event.stopPropagation()"/>
+                        </td>
+                        <td>
+                            <i (click)="toggleMenu(user.id - 1); $event.stopPropagation()" class="fa-solid fa-sliders"></i>
+                            <div *ngIf="showMenu[user.id - 1]" class="dropdown-menu" (click)="$event.stopPropagation()">
+                                <div class="menu-item" (click)="editItem(user.id - 1)" (click)="$event.stopPropagation()">Chỉnh sửa</div>
+                                <div class="menu-item" (click)="deleteItem(user.id - 1)" (click)="$event.stopPropagation()">Xóa</div>
+                            </div>
+                            <div *ngIf="isEditing[user.id - 1]" (click)="$event.stopPropagation()">
+                                <button (click)="saveItem(user.id - 1); $event.stopPropagation()">Lưu</button>
+                                <button (click)="cancelEdit(user.id - 1); $event.stopPropagation()">Hủy</button>
+                            </div>
+                          </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="pagination">
+                <button (click)="previousPage()" [disabled]="currentPage === 1">Trước</button>
+                <span>Trang {{currentPage}} / {{totalPages}}</span>
+                <button (click)="nextPage()" [disabled]="currentPage === totalPages">Tiếp</button>
+            </div>
         </div>
     </div>
 </div>
