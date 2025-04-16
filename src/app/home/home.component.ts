@@ -37,18 +37,20 @@ export class HomeComponent implements OnInit {
     });
     this.adminService.getFullUser().subscribe(
       (data: any) => {
-        // console.log('API trả về:', data);
+        console.log('API trả về:', data);
 
         // Gán chính xác mảng users
         this.users = Array.isArray(data) ? data : data.users;
 
         // Nếu vẫn không chắc chắn:
         // this.users = Array.isArray(data.users) ? data.users : [data.users];
-      },
-      (error: any) => {
-        console.log(error);
       }
     );
+    this.adminService.testAdmin().subscribe(
+      (data:any)=>{
+        console.log(data);
+      }
+    )
   }
 
   goToUser(id: number) {

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
       (data:any)=>{
         this.adminService.setCookieID(data.id)
         this.adminService.setCookiedName(data.fullname)
+        this.adminService.setToken(data.token)
         this.router.navigate(['/']);
       },
       (error:any)=>{
@@ -32,13 +33,6 @@ export class LoginComponent implements OnInit {
     if(this.adminService.getCookieID() !==''){
       this.router.navigate(['/'])
     }
-    // this.adminService.testAdmin().subscribe(
-    //   (data:any)=>{
-    //     console.log(data);
-    //   },
-    //   (error:any)=>{
-    //     console.log(error);
-    //   }
-    // )
+
   }
 }

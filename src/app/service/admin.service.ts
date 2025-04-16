@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable ,PLATFORM_ID} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,6 +13,7 @@ export class AdminService {
   constructor(
     private http:HttpClient,
     private cookieService : CookieService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
   login(tk:any,mk:any){
     const body={
@@ -20,11 +22,22 @@ export class AdminService {
     }
     return this.http.post('http://localhost:8082/user/login',body)
   }
-
+  testAdmin(){
+    const body={tk:"admin"}
+    return this.http.post('http://localhost:8082/admin/hello',body)
+  }
   getAllUsers(){
     return this.http.get(environment.apiGetUsers)
   }
-
+  getToken() {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('token');
+    }
+    return null;
+  }
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
   //lấy ra thông tin user
   getInfoUser(id:any){
     const body={
