@@ -100,21 +100,26 @@
                             <i (click)="toggleMenu(user.id - 1); $event.stopPropagation()" class="fa-solid fa-sliders"></i>
                             <div *ngIf="showMenu[user.id - 1]" class="dropdown-menu" (click)="$event.stopPropagation()">
                                 <div class="menu-item" (click)="editItem(user.id - 1)" (click)="$event.stopPropagation()">Chỉnh sửa</div>
-                                <div class="menu-item" (click)="deleteItem(user.id - 1)" (click)="$event.stopPropagation()">Xóa</div>
+                                <div class="menu-item" (click)="deleteItem(user.id)" (click)="$event.stopPropagation()">Xóa</div>
                             </div>
                             <div *ngIf="isEditing[user.id - 1]" (click)="$event.stopPropagation()">
-                                <button (click)="saveItem(user.id - 1); $event.stopPropagation()">Lưu</button>
+                                <button (click)="saveItem(user.id); $event.stopPropagation()">Lưu</button>
                                 <button (click)="cancelEdit(user.id - 1); $event.stopPropagation()">Hủy</button>
                             </div>
                           </td>
                     </tr>
                 </tbody>
             </table>
-            <div class="pagination">
-                <button (click)="previousPage()" [disabled]="currentPage === 1">Trước</button>
-                <span>Trang {{currentPage}} / {{totalPages}}</span>
-                <button (click)="nextPage()" [disabled]="currentPage === totalPages">Tiếp</button>
-            </div>
+            <div class="pagination-container">
+                <pagination-controls
+                  (pageChange)="currentPage = $event"
+                  previousLabel="Trước"
+                  nextLabel="Sau"
+                  [maxSize]="4"
+                  [directionLinks]="true"
+                  [autoHide]="true">
+                </pagination-controls>
+              </div>
         </div>
     </div>
 </div>
