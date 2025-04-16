@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AdminService } from '../service/admin.service';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
   isActive: boolean[] = []; // Define the active state array
   isEditing: boolean[] = []; // Define the editing state array
@@ -35,22 +36,20 @@ export class HomeComponent implements OnInit {
     this.users.forEach(user => {
       this.isEditing[user.id] = false;
     });
-    this.adminService.getFullUser().subscribe(
-      (data: any) => {
-        console.log('API trả về:', data);
-
-        // Gán chính xác mảng users
-        this.users = Array.isArray(data) ? data : data.users;
-
-        // Nếu vẫn không chắc chắn:
-        // this.users = Array.isArray(data.users) ? data.users : [data.users];
-      }
-    );
-    this.adminService.testAdmin().subscribe(
-      (data:any)=>{
-        console.log(data);
-      }
-    )
+    
+    if(isPlatformBrowser(this.platformId)){   
+      this.adminService.getFullUser().subscribe(
+        (data: any) => {
+          console.log('API trả về:', data);
+  
+          // Gán chính xác mảng users
+          this.users = Array.isArray(data) ? data : data.users;
+  
+          // Nếu vẫn không chắc chắn:
+          // this.users = Array.isArray(data.users) ? data.users : [data.users];
+        }
+      );
+    } 
   }
 
   goToUser(id: number) {
