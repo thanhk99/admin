@@ -101,3 +101,89 @@ ul{
     padding: 1%;
     gap:2vh;
 }
+.user-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .account-block {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .account-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* vẫn giữ để đẩy icon edit sang phải */
+    gap: 10px; /* giúp cách đều đẹp */
+  }
+  
+  /* fix chiều cao & canh giữa */
+  .account-info {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    flex: 1;
+    gap: 8px; /* đảm bảo khoảng cách đều */
+  }
+  
+  /* căn đều width icon */
+  .account-info {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    flex: 1;
+    gap: 10px;
+  }
+  
+  .account-info input {
+    flex: 1;
+    max-width: 250px;  /* đặt giới hạn để không quá dài */
+    min-width: 150px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-top: 2vh;
+  }
+
+  
+  
+  /* căn chỉnh icon chỉnh sửa */
+  .edit-icon {
+    cursor: pointer;
+    font-size: 18px;
+    color: #444;
+  }
+  
+  
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  
+  button.save {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button.cancel {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

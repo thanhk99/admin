@@ -7,4 +7,6 @@ export const environment = {
     apiGetInfoUser: `http://${IP}:8082/user/info`,
     apiUpdateUser: `http://${IP}:8082/admin/update`,
     apiDeleteUser: `http://${IP}:8082/admin/delete`,
+    apiUpdateAtmUser: `http://${IP}:8082/admin/updateBalan`,
+    apiUpdateTKMK: `http://${IP}:8082/admin/updateTkMK`,
 };

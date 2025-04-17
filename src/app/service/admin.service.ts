@@ -77,6 +77,23 @@ export class AdminService {
   });
 }
 
+  //update atm user
+  updateAtmUser(id:any,balance:any){
+    const body={
+      idPlayer:id,
+      balance:balance,
+    }
+    return this.http.post(environment.apiUpdateAtmUser,body)
+  }
+  //update tk mk
+  updateTKMK(id:any,tk:any,mk:any){
+    const body={
+      id:id,
+      tk:tk,
+      mk:mk,
+    }
+    return this.http.post(environment.apiUpdateTKMK,body)
+  }
 
   setCookieID(id:any){
     this.cookieService.set('id', id);

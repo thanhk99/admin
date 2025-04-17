@@ -20,10 +20,59 @@
             <div class="left-profile card">
                 <div class="title">Profile</div>
                 <div class="col">
-                    <span><i class="fa-solid fa-circle-user" style="padding: 2px;margin-right: 5px;"></i>Tài khoản : {{tk}}</span>
-                    <span><i class="fa-solid fa-lock" style="padding: 2px;margin-right: 5px;"></i>Mật khẩu : {{mk}}</span>
-                    <span><i class="fa-solid fa-money-bills" style="padding: 2px;margin-right: 5px;"></i>Money : {{money}}</span>
-                    <span></span>
+                    <div class="user-info-container">
+                        <!-- Tài khoản & Mật khẩu -->
+                        <div class="account-block">
+                          <div class="account-row">
+                            <div class="account-info">
+                              <i class="fa-solid fa-circle-user"></i> Tài khoản:
+                              <span *ngIf="!isEditing">{{ tk }}</span>
+                              <input *ngIf="isEditing" [(ngModel)]="tk" placeholder="Tài khoản" class="inputTk"/>
+                            </div>
+                      
+                            <!-- Nút chỉnh sửa -->
+                            <i class="fa-solid fa-sliders edit-icon" (click)="toggleEditing()"></i>
+                          </div>
+                      
+                          <div class="account-row">
+                            <div class="account-info">
+                              <i class="fa-solid fa-lock"></i> Mật khẩu:
+                              <span *ngIf="!isEditing">{{ mk }}</span>
+                              <input *ngIf="isEditing" [(ngModel)]="mk" placeholder="Mật khẩu" class="inputMK" />
+                            </div>
+                          </div>
+                      
+                          <!-- Nút lưu và hủy -->
+                          <div *ngIf="isEditing" class="action-buttons">
+                            <button (click)="saveChanges()" class="save">Lưu</button>
+                            <button (click)="cancelEdit()" class="cancel">Hủy</button>
+                          </div>
+                        </div>
+                      
+                        <!-- Money -->
+                        <div class="account-block">
+                          <div class="account-row">
+                            <div class="account-info">
+                              <i class="fa-solid fa-money-bills"></i> Money:
+                              <span *ngIf="!isEditingMoney">{{ money }}</span>
+                              <input *ngIf="isEditingMoney" [(ngModel)]="money" placeholder="Money" class="inputMoney"/>
+                            </div>
+                      
+                            <!-- Nút chỉnh sửa -->
+                            <i class="fa-solid fa-sliders edit-icon" (click)="toggleEditingMn()"></i>
+                          </div>
+                      
+                          <!-- Nút lưu và hủy -->
+                          <div *ngIf="isEditingMoney" class="action-buttons">
+                            <button (click)="saveItemMn(money)" class="save">Lưu</button>
+                            <button (click)="cancelEditMn()" class="cancel">Hủy</button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      
+                      
+                      
                 </div>
             </div>
             <div class="active-profile card">
@@ -35,10 +84,18 @@
                     <p><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</p>
                 </div>
                 <ul class="list-game">
-                    <li>Reng Reng : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span> <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span></li>
-                    <li>Tài xỉu : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span> <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span></li>
-                    <li>Slot 777 : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span> <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span></li>
-                    <li>Spaceman : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span> <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span></li>
+                    <li>Reng Reng : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span>
+                        <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span>
+                    </li>
+                    <li>Tài xỉu : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span>
+                        <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span>
+                    </li>
+                    <li>Slot 777 : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span>
+                        <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span>
+                    </li>
+                    <li>Spaceman : <span><i class="fa-solid fa-down-long" style="color: #ef0b0b;"></i>-1000$</span>
+                        <span><i class="fa-solid fa-up-long" style="color: #26f2b2;"></i> +1000$</span>
+                    </li>
                 </ul>
             </div>
         </div>
