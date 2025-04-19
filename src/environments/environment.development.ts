@@ -9,4 +9,10 @@ export const environment = {
     apiDeleteUser: `http://${IP}:8082/admin/delete`,
     apiUpdateAtmUser: `http://${IP}:8082/admin/updateBalan`,
     apiUpdateTKMK: `http://${IP}:8082/admin/updateTkMK`,
+    apiSumWin: `http://${IP}:8082/admin/totalMoney`,
+    apiSumLose: `http://${IP}:8082/admin/totalLost`,
+    apiRengWin: `http://${IP}:8082/admin/totalMoneyGame`,
+    apiRengLose: `http://${IP}:8082/admin/totalLostGame`,
+    apiClWin: `http://${IP}:8082/admin/totalMoneyCL`,
+    apiClLose: `http://${IP}:8082/admin/totalLostCL`,
 };
