@@ -1,0 +1,10 @@
+{
+    "/allUsers": {
+      "target": "http://127.0.0.1:8082/admin",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/allUsers": ""
+      }
+    }
+  }

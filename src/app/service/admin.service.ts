@@ -53,8 +53,7 @@ export class AdminService {
   }
   // lấy ra tất cả usẻ
   getFullUser(){
-    const body={}
-    return this.http.post(environment.apiGetFullUser , body)
+    return this.http.get(environment.apiGetFullUser )
   }
 
   //update user

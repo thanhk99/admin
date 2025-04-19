@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-side-left',
   imports: [],
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 export class SideLeftComponent {
   constructor(
     private router:Router,
+    private cookieService: CookieService
   ){}
 
   UsersPage(){
@@ -16,5 +18,10 @@ export class SideLeftComponent {
   }
   DashboardPage(){
     this.router.navigate(['/'])
+  }
+  logout(){
+    localStorage.clear()
+    this.cookieService.deleteAll()
+    this.router.navigate(["/login"])
   }
 }
