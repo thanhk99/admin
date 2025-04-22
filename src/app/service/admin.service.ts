@@ -94,6 +94,48 @@ export class AdminService {
     return this.http.post(environment.apiUpdateTKMK,body)
   }
 
+  sumAllwin(playerId:any){
+    const body={
+      playerId:playerId,
+    }
+    return this.http.post(environment.apiSumWin,body)
+  }
+
+  sumAllLose(playerId:any){
+    const body={
+      playerId:playerId,
+    }
+    return this.http.post(environment.apiSumLose,body)
+  }
+
+  sumRengWin(playerId:any){
+    const body={
+      playerId:playerId,
+    }
+    return this.http.post(environment.apiRengWin,body)
+  }
+  
+  sumRengLose(playerId:any){
+    const body={
+      playerId:playerId,
+    }
+    return this.http.post(environment.apiRengLose,body)
+  }
+
+  sumClWin(playerId:any){
+    const body={
+      playerId:playerId,
+    }
+    return this.http.post(environment.apiClWin,body)
+  }
+  
+  sumClLose(playerId:any){
+    const body={
+      playerId:playerId,
+    }
+    return this.http.post(environment.apiClLose,body)
+  }
+
   setCookieID(id:any){
     this.cookieService.set('id', id);
   }

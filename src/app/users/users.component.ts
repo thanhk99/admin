@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../service/admin.service';
 import { CommonModule } from '@angular/common';
 import { NgIf } from '@angular/common';
@@ -25,8 +25,16 @@ export class UsersComponent {
   isEditingMoney: boolean = false; // Biến để theo dõi trạng thái chỉnh sửa tiền
   isEditing: boolean = false; // Biến để theo dõi trạng thái chỉnh sửa
   idPlayer: number = 0; // Biến để lưu id người dùng
+  sumAlllost : number = 0; // Biến để lưu tổng tiền thua
+  sumAllWin : number = 0; // Biến để lưu tổng tiền thắng
+  sumRengWin : number = 0; // Biến để lưu tổng tiền thắng reng
+  sumRengLose : number = 0; // Biến để lưu tổng tiền thua reng
+  sumClWin : number = 0; // Biến để lưu tổng tiền thắng CL
+  sumClLose : number = 0; // Biến để lưu tổng tiền thua CL
+  sumUser: number = 0; // Biến để lưu tổng tiền của user
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private adminService: AdminService
   ) { }
 
@@ -54,6 +62,27 @@ export class UsersComponent {
         console.error('Error fetching user data:', error);
       }
     );
+    // tinh tong ngdung
+
+    this.adminService.getFullUser().subscribe(
+      (data: any) => {
+        this.sumUser += data.length - 1; // Cộng dồn số lượng người dùng - 1 admin
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );  
+
+    this.sumAllLoseUser();
+    this.sumAllWinUser();
+    this.sumRengWinUser();
+    this.sumRengLoseUser();
+    this.sumClWinUser();
+    this.sumClLoseUser();
+  }
+  addUser() {
+    this.router.navigate(['/add-users']);
   }
   toggleEditing() {
     this.isEditing = !this.isEditing;
@@ -109,6 +138,89 @@ export class UsersComponent {
   cancelEditMn() {
    
     this.isEditingMoney = false; // Hủy bỏ chỉnh sửa và quay lại trạng thái ban đầu
+  }
+
+  sumAllWinUser() {
+    const playerId = this.userId; // Lấy playerId từ biến userId
+    console.log('playerId:', playerId); // Kiểm tra giá trị playerId
+    this.adminService.sumAllwin(playerId).subscribe(
+      (data: any) => {
+        this.sumAllWin = data;
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+  sumAllLoseUser() {
+    const playerId = this.userId; // Lấy playerId từ biến userId
+    console.log('playerId:', playerId); // Kiểm tra giá trị playerId
+    this.adminService.sumAllLose(playerId).subscribe(
+      (data: any) => {
+        this.sumAlllost = data;
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+  sumRengWinUser() {
+    // Lấy playerId từ biến userId
+    const playerId = this.userId; // Lấy playerId từ biến userId
+    console.log('playerId:', playerId); // Kiểm tra giá trị playerId
+    this.adminService.sumRengWin(playerId).subscribe(
+      (data: any) => {
+        this.sumRengWin = data;
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+  sumRengLoseUser() {
+    // Lấy playerId từ biến userId
+    const playerId = this.userId; // Lấy playerId từ biến userId
+    console.log('playerId:', playerId); // Kiểm tra giá trị playerId
+    this.adminService.sumRengLose(playerId).subscribe(
+      (data: any) => {
+        this.sumRengLose = data;
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+  sumClWinUser() {
+    // Lấy playerId từ biến userId
+    const playerId = this.userId; // Lấy playerId từ biến userId
+    console.log('playerId:', playerId); // Kiểm tra giá trị playerId
+    this.adminService.sumClWin(playerId).subscribe(
+      (data: any) => {
+        this.sumClWin = data;
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+  sumClLoseUser() {
+    // Lấy playerId từ biến userId
+    const playerId = this.userId; // Lấy playerId từ biến userId
+    console.log('playerId:', playerId); // Kiểm tra giá trị playerId
+    this.adminService.sumClLose(playerId).subscribe(
+      (data: any) => {
+        this.sumClLose = data; 
+        console.log('API trả về:', data);
+      },
+      (error: any) => {
+        console.error('Error fetching user data:', error);
+      }
+    );  
   }
 
 

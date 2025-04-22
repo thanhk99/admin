@@ -1,189 +1,243 @@
-.row-info{
-    width: 70vw;
-    height: 10vh;
-    display: flex;
-    margin: 5vh 7.5vw;
-    justify-content: space-between;
-    text-align: center;
-}
-.card{
-    background-color: white;
-    box-shadow: 0 0.46875rem 2.1875rem rgba(4,9,20,0.03),0 0.9375rem 1.40625rem rgba(4,9,20,0.03),0 0.25rem 0.53125rem rgba(4,9,20,0.05),0 0.125rem 0.1875rem rgba(4,9,20,0.03);
-    border-radius: 15px;
-}
-.total-user{
-    font-size: 24px;
-    font-weight: bold;
-    padding: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.total-user p{
-    margin: 0;
-}
-.btn-add{
-    font-size: 24px;
-    background-color: rgba(37, 63, 226,0.8);
-    color: white;
-    text-align: center;
-    justify-content: center;
-    border-radius: 5%;
-    height: 50%;
-    padding: 1%;
-    cursor: pointer;
-}
-.btn-add:hover{
-    background-color: rgb(37, 63, 226);
-}
-.profile{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-.header-profile{
-    margin: 3%;
-    text-align: center;
-}
-.avatar-profile{
-    width: 10%;
-    height: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
-}
-.avatar-profile img{
-    width: 100%;
-    border-radius:50% ;
-    object-fit: contain;
-}
-.name-profile{
-    font-size: 24px;
-    font-weight: bold;
-}
-ul{
-    list-style: none;
-}
-.col{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 0 2%;
-    padding: 1%;
-    gap:2vh
-}
-.content-profile{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 0 2%;
-    padding: 1%;
-    gap:2vh;
-    margin-left: 9vh;
-}
-.list-game{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 0 2%;
-    padding: 1%;
-    gap:2vh;
-}
-.list-game ul{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 0 2%;
-    padding: 1%;
-    gap:2vh;
-}
-.user-info-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .account-block {
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-  }
-  
-  .account-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* vẫn giữ để đẩy icon edit sang phải */
-    gap: 10px; /* giúp cách đều đẹp */
-  }
-  
-  /* fix chiều cao & canh giữa */
-  .account-info {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    flex: 1;
-    gap: 8px; /* đảm bảo khoảng cách đều */
-  }
-  
-  /* căn đều width icon */
-  .account-info {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    flex: 1;
-    gap: 10px;
-  }
-  
-  .account-info input {
-    flex: 1;
-    max-width: 250px;  /* đặt giới hạn để không quá dài */
-    min-width: 150px;
-    padding: 6px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    margin-top: 2vh;
-  }
 
-  
-  
-  /* căn chỉnh icon chỉnh sửa */
-  .edit-icon {
-    cursor: pointer;
-    font-size: 18px;
-    color: #444;
-  }
-  
-  
-  .action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 8px;
-  }
-  
-  button.save {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button.cancel {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
+.profile {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Dòng tổng quan người dùng */
+/* Giả định sidebar rộng 250px */
+.content-wrapper {
+  margin-left: 250px; /* đẩy toàn bộ nội dung qua bên phải */
+  padding: 20px;
+  max-width: 1200px;
+}
+
+/* Dòng chứa total + add user */
+.row-info {
+  display: flex;
+  justify-content: space-between; /* Một cái bên trái, một cái bên phải */
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 30vh;
+}
+
+
+.total-user.card {
+  padding: 15px 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn-add {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 50vh;
+}
+.btn-add:hover {
+  background-color: #0056b3;
+}
+.btn-add:active {
+  background-color: #0056b3;
+  transform: scale(0.98); /* Tạo hiệu ứng nhấn nút */
+}
+.btn-add:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
+}
+/* Hồ sơ người dùng */
+.box-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 30vh;
+}
+
+/* Header Profile */
+.header-profile {
+  text-align: center;
+}
+
+.avatar-profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name-profile {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.time-join {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Nội dung hồ sơ */
+.content-profile {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Profile bên trái */
+.left-profile.card,
+.active-profile.card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.account-block {
+  margin-bottom: 20px;
+}
+
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.account-info {
+  flex: 1;
+}
+
+.inputTk,
+.inputMK,
+.inputMoney {
+  width: 100%;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.edit-icon {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+button.save {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button.cancel {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Tổng tiền thắng thua */
+.active-profile .overview.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.active-profile .overview.card p {
+  margin: 8px 0;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.overview .label {
+  margin-right: 6px;
+}
+
+.overview .lose i {
+  color: #ef0b0b;
+  margin-right: 4px;
+}
+
+.overview .win i {
+  color: #26f2b2;
+  margin-right: 4px;
+}
+
+/* Danh sách game */
+.list-game {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-game .game-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.game-title {
+  font-weight: bold;
+  font-size: 15px;
+  flex: 1;
+}
+
+.game-stats {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.game-stats .lose i {
+  color: #ef0b0b;
+  margin-right: 4px;
+}
+
+.game-stats .win i {
+  color: #26f2b2;
+  margin-right: 4px;
+}
