@@ -1,0 +1,51 @@
+<div *ngIf="!activeGame" class="game">
+    <div class="col-game card ">
+        <img src="slot777.jfif" alt="">
+        <div class="parameter">
+            <p></p>
+            <span></span>
+        </div>
+    </div>
+    <div class="col-game card">
+        <img src="rengreng.jfif" alt="">
+        <div class="parameter">
+            <p></p>
+            <span></span>
+        </div>
+    </div>
+    <div class="col-game card">
+        <img src="spaceman.jfif" alt="">
+        <div class="parameter">
+            <p></p>
+            <span></span>
+        </div>
+    </div>
+    <div class="col-game card">
+        <img src="chanle.jfif" (click)="openGame('chanle')" style="cursor: pointer;" >
+        <div class="parameter">
+            <p></p>
+            <span></span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="activeGame === 'chanle'" class="game-cl">
+    <h2>Game Tài Xỉu</h2>
+           
+    <div class="history">
+        <h3>Lịch sử kết quả Tài Xỉu</h3>
+        <div class="history-list">
+            <span *ngFor="let item of history" [ngClass]="item">{{ item }}</span>
+        </div>
+    </div>
+
+    <div class="force">
+        <h3>Lượt tiếp theo là</h3>
+        <div class="force-list">
+            <button class="forcebtn" (click)="forceResult(2)">Tài</button>
+            <button class="forcebtn" (click)="forceResult(1)">Xỉu</button>
+        </div>
+    </div>
+
+    <button class="backbtn" (click)="goBack()">Quay lại</button>
+</div>

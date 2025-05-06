@@ -1,5 +1,5 @@
 import { Inject, Injectable ,PLATFORM_ID} from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class AdminService {
   private apidelete= environment.apiDeleteUser;
+  private apihistorycl = environment.apiGetHistoryGame;
 
   constructor(
     private http:HttpClient,
@@ -51,7 +52,7 @@ export class AdminService {
     }
     return this.http.post(environment.apiGetAtmUser,body)
   }
-  // lấy ra tất cả usẻ
+  // lấy ra tất cả user
   getFullUser(){
     const body={}
     return this.http.post(environment.apiGetFullUser , body)
@@ -90,4 +91,19 @@ export class AdminService {
   getCookiedName(){
     return this.cookieService.get('name')
   }
+
+  getTaiXiuHistory(): Observable<any[]> {
+    return this.http.post<any[]>(this.apihistorycl, {
+      namegame: 'Tài xỉu'
+    });
+  }
+  
+  forceTaiXiuResult(code: number): Observable<HttpResponse<any>> {
+    return this.http.post('http://localhost:8082/game/force', null, {
+      params: { code: code.toString() },
+      observe: 'response', 
+      responseType: 'text' as 'json'
+    });
+  }
+
 }
