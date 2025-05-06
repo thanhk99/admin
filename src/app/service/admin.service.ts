@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { Inject, Injectable ,PLATFORM_ID} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+=======
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+>>>>>>> c2ac9490675922d6a1217d7c48ee9f6690a624e0
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -8,27 +13,32 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AdminService {
+<<<<<<< HEAD
   private apidelete= environment.apiDeleteUser;
   private apihistorycl = environment.apiGetHistoryGame;
+=======
+  private apidelete = environment.apiDeleteUser;
+>>>>>>> c2ac9490675922d6a1217d7c48ee9f6690a624e0
 
   constructor(
-    private http:HttpClient,
-    private cookieService : CookieService,
+    private http: HttpClient,
+    private cookieService: CookieService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
-  login(tk:any,mk:any){
-    const body={
-      "tk":tk , 
-      "mk":mk ,
+  login(tk: any, mk: any) {
+    const body = {
+      "tk": tk,
+      "mk": mk,
     }
-    return this.http.post('http://localhost:8082/user/login',body)
+    return this.http.post('http://localhost:8082/user/login', body)
   }
-  testAdmin(){
-    const body={tk:"admin"}
-    return this.http.post('http://localhost:8082/admin/hello',body)
+  testAdmin() {
+    const body = { tk: "admin" }
+    return this.http.post('http://localhost:8082/admin/hello', body)
   }
-  getAllUsers(){
-    return this.http.get(environment.apiGetUsers)
+  getAllUsers() {
+    const body = {};
+    return this.http.post(environment.apiGetUsers , body)
   }
   getToken() {
     if (isPlatformBrowser(this.platformId)) {
@@ -40,55 +50,142 @@ export class AdminService {
     localStorage.setItem('token', token);
   }
   //lấy ra thông tin user
-  getInfoUser(id:any){
-    const body={
-      id:id
+  getInfoUser(id: any) {
+    const body = {
+      id: id
     }
-    return this.http.post(environment.apiGetInfoUser,body)
+    return this.http.post(environment.apiGetInfoUser, body)
   }
-  getAtmUser(id:any){
-    const body={
-      idPlayer:id
+  getAtmUser(id: any) {
+    const body = {
+      idPlayer: id
     }
-    return this.http.post(environment.apiGetAtmUser,body)
+    return this.http.post(environment.apiGetAtmUser, body)
   }
+<<<<<<< HEAD
   // lấy ra tất cả user
   getFullUser(){
     const body={}
     return this.http.post(environment.apiGetFullUser , body)
+=======
+  // lấy ra tất cả usẻ
+  getFullUser() {
+    const body = {}
+    return this.http.post(environment.apiGetFullUser, body)
+>>>>>>> c2ac9490675922d6a1217d7c48ee9f6690a624e0
   }
 
   //update user
-  updateUser(id:any,fullname:any,email:any){
-    const body={
-      id:id,
-      fullname:fullname,
-      email:email,
+  updateUser(id: any, fullname: any, email: any) {
+    const body = {
+      id: id,
+      fullname: fullname,
+      email: email,
     }
-    return this.http.post(environment.apiUpdateUser,body)
+    return this.http.post(environment.apiUpdateUser, body)
   }
   //delete user
   deleteUser(id: number): Observable<any> {
-  const url = `${this.apidelete}`;
-  const body = { id: id };
+    const url = `${this.apidelete}`;
+    const body = { id: id };
 
-  return this.http.request('delete', url, {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    body: body
-  });
-}
+    return this.http.request('delete', url, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      body: body
+    });
+  }
 
+  //update atm user
+  updateAtmUser(id: any, balance: any) {
+    const body = {
+      idPlayer: id,
+      balance: balance,
+    }
+    return this.http.post(environment.apiUpdateAtmUser, body)
+  }
+  //update tk mk
+  updateTKMK(id: any, tk: any, mk: any) {
+    const body = {
+      id: id,
+      tk: tk,
+      mk: mk,
+    }
+    return this.http.post(environment.apiUpdateTKMK, body)
+  }
 
-  setCookieID(id:any){
+  sumAllwin(playerId: any) {
+    const body = {
+      playerId: playerId,
+    }
+    return this.http.post(environment.apiSumWin, body)
+  }
+
+  sumAllLose(playerId: any) {
+    const body = {
+      playerId: playerId,
+    }
+    return this.http.post(environment.apiSumLose, body)
+  }
+
+  sumRengWin(playerId: any) {
+    const body = {
+      playerId: playerId,
+    }
+    return this.http.post(environment.apiRengWin, body)
+  }
+
+  sumRengLose(playerId: any) {
+    const body = {
+      playerId: playerId,
+    }
+    return this.http.post(environment.apiRengLose, body)
+  }
+
+  sumClWin(playerId: any) {
+    const body = {
+      playerId: playerId,
+    }
+    return this.http.post(environment.apiClWin, body)
+  }
+
+  sumClLose(playerId: any) {
+    const body = {
+      playerId: playerId,
+    }
+    return this.http.post(environment.apiClLose, body)
+  }
+
+  //add user
+  addUser(tk: any, mk: any, fullname: any, email: any , role: any) {
+    const body = {
+      tk: tk,
+      mk: mk,
+      fullname: fullname,
+      email: email,
+      role: role
+    }
+    return this.http.post(environment.apiAddUser, body)
+  }
+  //add atm user
+  addAtmUser(id: any, stk: any, balance: any) {
+    const body = {
+      idPlayer: id,
+      stk: stk,
+      balance: balance
+    }
+    return this.http.post(environment.apiAddAtmUser, body)
+  }
+
+  setCookieID(id: any) {
     this.cookieService.set('id', id);
   }
-  getCookieID(){
+  getCookieID() {
     return this.cookieService.get('id');
   }
-  setCookiedName(name:any){
+  setCookiedName(name: any) {
     this.cookieService.set('name', name);
   }
-  getCookiedName(){
+  getCookiedName() {
     return this.cookieService.get('name')
   }
 

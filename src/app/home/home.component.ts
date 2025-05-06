@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5; // Số lượng giao dịch mỗi trang
   totalPages: number = 1;
-  paginatedData: any[] = [];
+  paginatedData:  { id: number, fullname: string, email: string, datetime: string }[] = [];
   users: { id: number, fullname: string, email: string, datetime: string }[] = []
   rotuer: any;
   amountIncome: number = 0;
@@ -78,15 +78,16 @@ export class HomeComponent implements OnInit {
 
 
   deleteItem(index: number): void {
-    const user = this.users[index];
+    const user = this.users[index].id;
+    console.log('Xoá người dùng:', user);
 
-    if (!user || !user.id) {
+    if (!user || !user) {
       alert('Người dùng không hợp lệ.');
       return;
     }
 
-    if (confirm(`Bạn chắc chắn muốn xoá người dùng ID ${user.id}?`)) {
-      this.adminService.deleteUser(user.id).subscribe(
+    if (confirm(`Bạn chắc chắn muốn xoá người dùng ID ${user}?`)) {
+      this.adminService.deleteUser(user).subscribe(
         (res) => {
           console.log('Xoá thành công:', res);
           this.users.splice(index, 1); // Cập nhật UI
@@ -104,6 +105,12 @@ export class HomeComponent implements OnInit {
     const id = this.users[index].id;
     const user = this.users.find(user => user.id === id);
     if (!user) return;
+    console.log('Gửi lên server:', {
+      id: user.id,
+      fullname: user.fullname,
+      email: user.email
+    });
+    
 
     // Gửi object user trực tiếp (gồm id, fullname, email)
     this.adminService.updateUser(
@@ -128,28 +135,28 @@ export class HomeComponent implements OnInit {
     this.isEditing[index] = false;
   }
 
-  updatePagination() {
-    this.showMenu = new Array(this.users.length).fill(false);
-    this.isActive = new Array(this.users.length).fill(false);
-    this.isEditing = new Array(this.users.length).fill(false);
+  // updatePagination() {
+  //   this.showMenu = new Array(this.users.length).fill(false);
+  //   this.isActive = new Array(this.users.length).fill(false);
+  //   this.isEditing = new Array(this.users.length).fill(false);
 
-    this.totalPages = Math.ceil(this.users.length / this.itemsPerPage);
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedData = this.users.slice(startIndex, endIndex);
-  }
-  previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePagination();
-    }
-  }
+  //   this.totalPages = Math.ceil(this.users.length / this.itemsPerPage);
+  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  //   const endIndex = startIndex + this.itemsPerPage;
+  //   this.paginatedData = this.users.slice(startIndex, endIndex);
+  // }
+  // previousPage() {
+  //   if (this.currentPage > 1) {
+  //     this.currentPage--;
+  //     this.updatePagination();
+  //   }
+  // }
 
-  // Chuyển sang trang tiếp theo
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePagination();
-    }
-  }
+  // // Chuyển sang trang tiếp theo
+  // nextPage() {
+  //   if (this.currentPage < this.totalPages) {
+  //     this.currentPage++;
+  //     this.updatePagination();
+  //   }
+  // }
 }
