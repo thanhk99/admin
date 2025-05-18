@@ -171,4 +171,16 @@ export class AdminService {
   getCookiedName() {
     return this.cookieService.get('name')
   }
+  getSumbetRengWin() {
+    return this.http.get(environment.apiBetRengWin);
+  }
+  getSumbetRengLose() {
+    return this.http.get(environment.apiBetRengLose);
+  }
+  getSumbetTXWin() {
+    return this.http.get(environment.apiBetTXWin);
+  }
+  getSumbetTXLose() {
+    return this.http.get(environment.apiBetTXLose);
+  }
 }

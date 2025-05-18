@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
   amountIncome: number = 0;
   amountUser: number = 0;
   http: any;
+  winR: number = 0;
+  loseR: number = 0;
+  winT: number = 0;
+  loseT: number = 0;
 
   constructor(
     private adminService: AdminService,
@@ -35,7 +39,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.users.forEach(user => {
       this.isEditing[user.id] = false;
+
     });
+    this.getSumLoseT();
+    this.getSumWinT();
+    this.getSumLose();
+    this.getSumWin();
     
     if(isPlatformBrowser(this.platformId)){   
       this.adminService.getFullUser().subscribe(
@@ -135,28 +144,48 @@ export class HomeComponent implements OnInit {
     this.isEditing[index] = false;
   }
 
-  // updatePagination() {
-  //   this.showMenu = new Array(this.users.length).fill(false);
-  //   this.isActive = new Array(this.users.length).fill(false);
-  //   this.isEditing = new Array(this.users.length).fill(false);
-
-  //   this.totalPages = Math.ceil(this.users.length / this.itemsPerPage);
-  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-  //   const endIndex = startIndex + this.itemsPerPage;
-  //   this.paginatedData = this.users.slice(startIndex, endIndex);
-  // }
-  // previousPage() {
-  //   if (this.currentPage > 1) {
-  //     this.currentPage--;
-  //     this.updatePagination();
-  //   }
-  // }
-
-  // // Chuyển sang trang tiếp theo
-  // nextPage() {
-  //   if (this.currentPage < this.totalPages) {
-  //     this.currentPage++;
-  //     this.updatePagination();
-  //   }
-  // }
+  getSumWin() {
+    this.adminService.getSumbetRengWin().subscribe(
+      (data: any) => {
+        this.winR = data;
+        console.log('Tổng tiền thắng:', this.winR);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thắng:', error);
+      }
+    );
+  }
+  getSumLose() {
+    this.adminService.getSumbetRengLose().subscribe(
+      (data: any) => {
+        this.loseR = data;
+        console.log('Tổng tiền thua:', this.loseR);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thua:', error);
+      }
+    );
+  }
+  getSumWinT() {
+    this.adminService.getSumbetTXWin().subscribe(
+      (data: any) => {
+        this.winT = data;
+        console.log('Tổng tiền thắng:', this.winT);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thắng:', error);
+      }
+    );
+  }
+  getSumLoseT() {
+    this.adminService.getSumbetTXLose().subscribe(
+      (data: any) => {
+        this.loseT = data;
+        console.log('Tổng tiền thua:', this.loseT);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thua:', error);
+      }
+    );
+  }
 }

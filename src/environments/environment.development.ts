@@ -17,4 +17,8 @@ export const environment = {
     apiClLose: `http://${IP}:8082/admin/totalLostCL`,
     apiAddUser: `http://${IP}:8082/admin/addUser`,
     apiAddAtmUser: `http://${IP}:8082/admin/registerAtm`,
+    apiBetRengWin: `http://${IP}:8082/admin/getSumBetRengWin`,
+    apiBetRengLose: `http://${IP}:8082/admin/getSumBetRengLose`,
+    apiBetTXWin: `http://${IP}:8082/admin/getSumBetCLWin`,
+    apiBetTXLose: `http://${IP}:8082/admin/getSumBetCLLose`,
 };
