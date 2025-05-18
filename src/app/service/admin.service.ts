@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { Inject, Injectable ,PLATFORM_ID} from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-=======
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
->>>>>>> c2ac9490675922d6a1217d7c48ee9f6690a624e0
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -13,12 +8,9 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AdminService {
-<<<<<<< HEAD
   private apidelete= environment.apiDeleteUser;
   private apihistorycl = environment.apiGetHistoryGame;
-=======
-  private apidelete = environment.apiDeleteUser;
->>>>>>> c2ac9490675922d6a1217d7c48ee9f6690a624e0
+
 
   constructor(
     private http: HttpClient,
@@ -62,17 +54,10 @@ export class AdminService {
     }
     return this.http.post(environment.apiGetAtmUser, body)
   }
-<<<<<<< HEAD
   // lấy ra tất cả user
   getFullUser(){
     const body={}
     return this.http.post(environment.apiGetFullUser , body)
-=======
-  // lấy ra tất cả usẻ
-  getFullUser() {
-    const body = {}
-    return this.http.post(environment.apiGetFullUser, body)
->>>>>>> c2ac9490675922d6a1217d7c48ee9f6690a624e0
   }
 
   //update user
