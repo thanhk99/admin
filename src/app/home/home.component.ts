@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
   itemsPerPage: number = 5; // Số lượng giao dịch mỗi trang
   totalPages: number = 1;
   paginatedData:  { id: number, fullname: string, email: string, datetime: string }[] = [];
-  users: { id: number, fullname: string, email: string, datetime: string }[] = []
+  users: {
+    isActive: boolean; id: number, fullname: string, email: string, datetime: string 
+}[] = []
   rotuer: any;
   amountIncome: number = 0;
   amountUser: number = 0;
@@ -96,14 +98,35 @@ export class HomeComponent implements OnInit {
     }
 
     if (confirm(`Bạn chắc chắn muốn xoá người dùng ID ${user}?`)) {
-      this.adminService.deleteUser(user).subscribe(
-        (res) => {
+      this.adminService.isDelete(user).subscribe(
+        (res : any) => {
           console.log('Xoá thành công:', res);
-          this.users.splice(index, 1); // Cập nhật UI
+          alert('Xoá thành công!');
+          
         },
-        (err) => {
+        (err : any) => {
           console.error('Xảy ra lỗi khi xoá:', err);
           alert('Không thể xoá người dùng!');
+        }
+      );
+    }
+  }
+  activeItem(index: number): void {
+    const user = this.users[index].id;
+    console.log('Kích hoạt người dùng:', user);
+    if (!user || !user) {
+      alert('Người dùng không hợp lệ.');
+      return;
+    }
+    if (confirm(`Bạn chắc chắn muốn kích hoạt người dùng ID ${user}?`)) {
+      this.adminService.isActive(user).subscribe(
+        (res : any) => {
+          console.log('Kích hoạt thành công:', res);
+          alert('Kích hoạt thành công!');
+        },
+        (err : any) => {
+          console.error('Xảy ra lỗi khi kích hoạt:', err);
+          alert('Không thể kích hoạt người dùng!');
         }
       );
     }

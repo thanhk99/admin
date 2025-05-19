@@ -1,7 +1,7 @@
-const IP='127.0.0.1'
+const IP = '127.0.0.1'
 export const environment = {
-    production:true,
-    apiGetUsers:`http://${IP}:8082/user`,
+    production: true,
+    apiGetUsers: `http://${IP}:8082/user`,
     apiGetAtmUser: `http://${IP}:8082/Atm/get`,
     apiGetFullUser: `http://${IP}:8082/admin/allUsers`,
     apiGetInfoUser: `http://${IP}:8082/user/info`,
@@ -18,9 +18,11 @@ export const environment = {
     apiClLose: `http://${IP}:8082/admin/totalLostCL`,
     apiAddUser: `http://${IP}:8082/admin/addUser`,
     apiAddAtmUser: `http://${IP}:8082/admin/registerAtm`,
-     apiBetRengWin: `http://${IP}:8082/admin/getSumBetRengWin`,
+    apiBetRengWin: `http://${IP}:8082/admin/getSumBetRengWin`,
     apiBetRengLose: `http://${IP}:8082/admin/getSumBetRengLose`,
     apiBetTXWin: `http://${IP}:8082/admin/getSumBetCLWin`,
     apiBetTXLose: `http://${IP}:8082/admin/getSumBetCLLose`,
+    apiIsDelete: `http://${IP}:8082/admin/delete`,
+    apiIsActive: `http://${IP}:8082/admin/restore`,
 
 };

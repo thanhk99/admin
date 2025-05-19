@@ -198,5 +198,17 @@ export class AdminService {
       responseType: 'text' as 'json'
     });
   }
+  isDelete(id: any) {
+    const body = {
+      id: id
+    }
+    return this.http.put(environment.apiIsDelete, body)
+  }
+  isActive(id: any) {
+    const body = {
+      id: id
+    }
+    return this.http.put(environment.apiIsActive, body)
+  }
 
 }
