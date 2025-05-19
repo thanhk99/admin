@@ -21,5 +21,6 @@ export const environment = {
     apiBetRengLose: `http://${IP}:8082/admin/getSumBetRengLose`,
     apiBetTXWin: `http://${IP}:8082/admin/getSumBetCLWin`,
     apiBetTXLose: `http://${IP}:8082/admin/getSumBetCLLose`,
+    apiGetHistoryGame: `http://${IP}:8082/game/getHistoryCl`,
 
 };

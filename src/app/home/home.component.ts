@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit {
   }
 
   getSumWin() {
-    this.adminService.getSumbetRengWin().subscribe(
+    this.adminService.sumBetRengWin().subscribe(
       (data: any) => {
         this.winR = data;
         console.log('Tổng tiền thắng:', this.winR);
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
     );
   }
   getSumLose() {
-    this.adminService.getSumbetRengLose().subscribe(
+    this.adminService.sumBetRengLose().subscribe(
       (data: any) => {
         this.loseR = data;
         console.log('Tổng tiền thua:', this.loseR);
@@ -167,7 +167,7 @@ export class HomeComponent implements OnInit {
     );
   }
   getSumWinT() {
-    this.adminService.getSumbetTXWin().subscribe(
+    this.adminService.sumBetTXWin().subscribe(
       (data: any) => {
         this.winT = data;
         console.log('Tổng tiền thắng:', this.winT);
@@ -178,7 +178,7 @@ export class HomeComponent implements OnInit {
     );
   }
   getSumLoseT() {
-    this.adminService.getSumbetTXLose().subscribe(
+    this.adminService.sumBetTXLose().subscribe(
       (data: any) => {
         this.loseT = data;
         console.log('Tổng tiền thua:', this.loseT);

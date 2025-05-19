@@ -17,4 +17,7 @@ export class SideLeftComponent {
   DashboardPage(){
     this.router.navigate(['/'])
   }
+  GamePage(){
+    this.router.navigate(['/game'])
+  }
 }
