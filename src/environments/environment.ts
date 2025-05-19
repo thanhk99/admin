@@ -7,6 +7,7 @@ export const environment = {
     apiGetInfoUser: `http://${IP}:8082/user/info`,
     apiUpdateUser: `http://${IP}:8082/admin/update`,
     apiDeleteUser: `http://${IP}:8082/admin/delete`,
+    apiGetHistoryGame: `http://${IP}:8082/game/getHistoryCl`,
     apiUpdateAtmUser: `http://${IP}:8082/admin/updateBalan`,
     apiUpdateTKMK: `http://${IP}:8082/admin/updateTkMK`,
     apiSumWin: `http://${IP}:8082/admin/totalMoney`,
@@ -21,7 +22,6 @@ export const environment = {
     apiBetRengLose: `http://${IP}:8082/admin/getSumBetRengLose`,
     apiBetTXWin: `http://${IP}:8082/admin/getSumBetCLWin`,
     apiBetTXLose: `http://${IP}:8082/admin/getSumBetCLLose`,
-    apiGetHistoryGame: `http://${IP}:8082/game/getHistoryCl`,
     apiIsDelete: `http://${IP}:8082/admin/delete`,
     apiIsActive: `http://${IP}:8082/admin/restore`,
 

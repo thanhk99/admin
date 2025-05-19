@@ -8,7 +8,9 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AdminService {
-  private apidelete = environment.apiDeleteUser;
+  private apidelete= environment.apiDeleteUser;
+  private apihistorycl = environment.apiGetHistoryGame;
+
 
   constructor(
     private http: HttpClient,
@@ -52,10 +54,10 @@ export class AdminService {
     }
     return this.http.post(environment.apiGetAtmUser, body)
   }
-  // lấy ra tất cả usẻ
-  getFullUser() {
-    const body = {}
-    return this.http.post(environment.apiGetFullUser, body)
+  // lấy ra tất cả user
+  getFullUser(){
+    const body={}
+    return this.http.post(environment.apiGetFullUser , body)
   }
 
   //update user
