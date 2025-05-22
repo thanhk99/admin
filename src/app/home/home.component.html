@@ -89,11 +89,11 @@
                             <i (click)="toggleMenu(user.id - 1); $event.stopPropagation()" class="fa-solid fa-sliders"></i>
                             <div *ngIf="showMenu[user.id - 1]" class="dropdown-menu" (click)="$event.stopPropagation()">
                                 <div class="menu-item" (click)="editItem(user.id - 1)" (click)="$event.stopPropagation()">Chỉnh sửa</div>
-                                <div class="menu-item" (click)="deleteItem(user.id)" (click)="$event.stopPropagation()">Xóa</div>
-                                <div class="menu-item" (click)="activeItem(user.id)" (click)="$event.stopPropagation()">Khôi phục</div>
+                                <div class="menu-item" (click)="deleteItem(user.id - 1)" (click)="$event.stopPropagation()">Xóa</div>
+                                <div class="menu-item" (click)="activeItem(user.id - 1)" (click)="$event.stopPropagation()">Khôi phục</div>
                             </div>
                             <div *ngIf="isEditing[user.id - 1]" (click)="$event.stopPropagation()">
-                                <button (click)="saveItem(user.id); $event.stopPropagation()">Lưu</button>
+                                <button (click)="saveItem(user.id - 1); $event.stopPropagation()">Lưu</button>
                                 <button (click)="cancelEdit(user.id - 1); $event.stopPropagation()">Hủy</button>
                             </div>
                           </td>
