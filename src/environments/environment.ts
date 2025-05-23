@@ -15,4 +15,7 @@ export const environment = {
     apiRengLose: `http://${IP}:8082/admin/totalLostGame`,
     apiClWin: `http://${IP}:8082/admin/totalMoneyCL`,
     apiClLose: `http://${IP}:8082/admin/totalLostCL`,
+    apiAddUser: `http://${IP}:8082/admin/addUser`,
+    apiAddAtmUser: `http://${IP}:8082/admin/registerAtm`,
+
 };
