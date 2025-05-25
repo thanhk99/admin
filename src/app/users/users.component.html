@@ -1,109 +1,138 @@
 <div class="row-info">
-    <div class="total-user card ">
-        <p>total users</p>
-        <span>{{sumUser}}</span>
-    </div>
+  <div class="total-user card ">
+    <p>total users</p>
+    <span>{{sumUser}}</span>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10vh;">
+    <!-- Nút Thêm người dùng -->
     <div class="btn-add" (click)="addUser()">
-        <i class="fa-solid fa-user-plus"></i>Add User
+      <i class="fa-solid fa-user-plus"></i> Add User
     </div>
+
+    <!-- Nút Xóa -->
+    <div class="btn-delete" (click)="deleteUser()">
+      <i class="fa-solid fa-user-xmark"></i> Xóa
+    </div>
+
+    <!-- Nút Khôi phục -->
+    <div class="btn-restore" (click)="resUser()">
+      <i class="fa-solid fa-user-check"></i> Khôi phục
+    </div>
+  </div>
+
 </div>
 <div class="profile">
-    <div class="box-profile">
-        <div class="header-profile">
-            <div class="avatar-profile">
-                <img src="https://htmlstream.com/front-dashboard/assets/img/160x160/img6.jpg" alt="">
-            </div>
-            <div class="name-profile">{{fullName}}</div>
-            <div class="time-join"><i class="fa-solid fa-calendar-days"></i>07/05/2025</div>
-        </div>
-        <div class="content-profile">
-            <div class="left-profile card">
-                <div class="title">Profile</div>
-                <div class="col">
-                    <div class="user-info-container">
-                        <!-- Tài khoản & Mật khẩu -->
-                        <div class="account-block">
-                          <div class="account-row">
-                            <div class="account-info">
-                              <i class="fa-solid fa-circle-user"></i> Tài khoản:
-                              <span *ngIf="!isEditing">{{ tk }}</span>
-                              <input *ngIf="isEditing" [(ngModel)]="tk" placeholder="Tài khoản" class="inputTk"/>
-                            </div>
-                      
-                            <!-- Nút chỉnh sửa -->
-                            <i class="fa-solid fa-sliders edit-icon" (click)="toggleEditing()"></i>
-                          </div>
-                      
-                          <div class="account-row">
-                            <div class="account-info">
-                              <i class="fa-solid fa-lock"></i> Mật khẩu:
-                              <span *ngIf="!isEditing">{{ mk }}</span>
-                              <input *ngIf="isEditing" [(ngModel)]="mk" placeholder="Mật khẩu" class="inputMK" />
-                            </div>
-                          </div>
-                      
-                          <!-- Nút lưu và hủy -->
-                          <div *ngIf="isEditing" class="action-buttons">
-                            <button (click)="saveChanges()" class="save">Lưu</button>
-                            <button (click)="cancelEdit()" class="cancel">Hủy</button>
-                          </div>
-                        </div>
-                      
-                        <!-- Money -->
-                        <div class="account-block">
-                          <div class="account-row">
-                            <div class="account-info">
-                              <i class="fa-solid fa-money-bills"></i> Money:
-                              <span *ngIf="!isEditingMoney">{{ money }}</span>
-                              <input *ngIf="isEditingMoney" [(ngModel)]="money" placeholder="Money" class="inputMoney"/>
-                            </div>
-                      
-                            <!-- Nút chỉnh sửa -->
-                            <i class="fa-solid fa-sliders edit-icon" (click)="toggleEditingMn()"></i>
-                          </div>
-                      
-                          <!-- Nút lưu và hủy -->
-                          <div *ngIf="isEditingMoney" class="action-buttons">
-                            <button (click)="saveItemMn(money)" class="save">Lưu</button>
-                            <button (click)="cancelEditMn()" class="cancel">Hủy</button>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-            </div>
-            <div class="active-profile card">
-                <div class="title">
-                    Active
-                </div>
-                <div class="overview card">
-                  <p class="lose">
-                    <span class="label">Tổng tiền thua:</span>
-                    <i class="fa-solid fa-down-long"></i> -{{ sumAlllost }}$
-                  </p>
-                  <p class="win">
-                    <span class="label">Tổng tiền thắng:</span>
-                    <i class="fa-solid fa-up-long"></i> +{{ sumAllWin }}$
-                  </p>
-                </div>
-                
-                <ul class="list-game">
-                  <li class="game-row">
-                    <div class="game-title">Reng Reng:</div>
-                    <div class="game-stats">
-                      <span class="lose"><i class="fa-solid fa-down-long"></i> -{{ sumRengLose }}$</span>
-                      <span class="win"><i class="fa-solid fa-up-long"></i> +{{ sumRengWin }}$</span>
-                    </div>
-                  </li>
-                  <li class="game-row">
-                    <div class="game-title">Tài xỉu:</div>
-                    <div class="game-stats">
-                      <span class="lose"><i class="fa-solid fa-down-long"></i> -{{ sumClLose }}$</span>
-                      <span class="win"><i class="fa-solid fa-up-long"></i> +{{ sumClWin }}$</span>
-                    </div>
-                  </li>
-                </ul>
-                
-            </div>
-        </div>
+  <div class="box-profile">
+    <div class="header-profile">
+      <div class="avatar-profile">
+        <img src="https://htmlstream.com/front-dashboard/assets/img/160x160/img6.jpg" alt="">
+      </div>
+      <div class="name-profile">{{fullName}}</div>
+      <div class="time-join"><i class="fa-solid fa-calendar-days"></i>07/05/2025</div>
     </div>
+    <div class="content-profile">
+      <div class="left-profile card">
+        <div class="title">Profile</div>
+        <div class="col">
+          <div class="user-info-container">
+            <!-- Tài khoản & Mật khẩu -->
+            <div class="account-block">
+              <div class="account-row">
+                <div class="account-info">
+                  <i class="fa-solid fa-circle-user"></i> Tài khoản:
+                  <span *ngIf="!isEditing">{{ tk }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="tk" placeholder="Tài khoản" class="inputTk" />
+                </div>
+
+                <!-- Nút chỉnh sửa -->
+                <i class="fa-solid fa-sliders edit-icon" (click)="toggleEditing()"></i>
+              </div>
+
+              <div class="account-row">
+                <div class="account-info">
+                  <i class="fa-solid fa-lock"></i> Mật khẩu:
+                  <span *ngIf="!isEditing">{{ mk }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="mk" placeholder="Mật khẩu" class="inputMK" />
+                </div>
+              </div>
+
+              <div class="account-row">
+                <div class="account-info">
+                  <i class="fa-solid fa-envelope"></i> email:
+                  <span *ngIf="!isEditing">{{ email }}</span>
+                  <input *ngIf="isEditing" [(ngModel)]="email" placeholder="Email" class="inputEmail" />
+                </div>
+                <div class="account-status">
+                  <i class="fa-solid fa-circle" [ngClass]="isdelete ? 'status-icon-deleted' : 'status-icon-active'"></i>
+                  Trạng thái: {{ isdelete ? 'Đã xóa' : 'Đang hoạt động' }}
+                </div>
+              </div>
+
+
+
+
+              <!-- Nút lưu và hủy -->
+              <div *ngIf="isEditing" class="action-buttons">
+                <button (click)="saveChanges()" class="save">Lưu</button>
+                <button (click)="cancelEdit()" class="cancel">Hủy</button>
+              </div>
+            </div>
+
+            <!-- Money -->
+            <div class="account-block">
+              <div class="account-row">
+                <div class="account-info">
+                  <i class="fa-solid fa-money-bills"></i> Money:
+                  <span *ngIf="!isEditingMoney">{{ money }}</span>
+                  <input *ngIf="isEditingMoney" [(ngModel)]="money" placeholder="Money" class="inputMoney" />
+                </div>
+
+                <!-- Nút chỉnh sửa -->
+                <i class="fa-solid fa-sliders edit-icon" (click)="toggleEditingMn()"></i>
+              </div>
+
+              <!-- Nút lưu và hủy -->
+              <div *ngIf="isEditingMoney" class="action-buttons">
+                <button (click)="saveItemMn(money)" class="save">Lưu</button>
+                <button (click)="cancelEditMn()" class="cancel">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="active-profile card">
+        <div class="title">
+          Active
+        </div>
+        <div class="overview card">
+          <p class="lose">
+            <span class="label">Tổng tiền thua:</span>
+            <i class="fa-solid fa-down-long"></i> -{{ sumAlllost }}$
+          </p>
+          <p class="win">
+            <span class="label">Tổng tiền thắng:</span>
+            <i class="fa-solid fa-up-long"></i> +{{ sumAllWin }}$
+          </p>
+        </div>
+
+        <ul class="list-game">
+          <li class="game-row">
+            <div class="game-title">Reng Reng:</div>
+            <div class="game-stats">
+              <span class="lose"><i class="fa-solid fa-down-long"></i> -{{ sumRengLose }}$</span>
+              <span class="win"><i class="fa-solid fa-up-long"></i> +{{ sumRengWin }}$</span>
+            </div>
+          </li>
+          <li class="game-row">
+            <div class="game-title">Tài xỉu:</div>
+            <div class="game-stats">
+              <span class="lose"><i class="fa-solid fa-down-long"></i> -{{ sumClLose }}$</span>
+              <span class="win"><i class="fa-solid fa-up-long"></i> +{{ sumClWin }}$</span>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
 </div>

@@ -2,7 +2,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 @Injectable({
   providedIn: 'root'
@@ -98,59 +98,69 @@ export class AdminService {
     return this.http.post(environment.apiUpdateTKMK, body)
   }
 
-  sumAllwin(playerId: any) {
-    const body = {
-      playerId: playerId,
-    }
-    return this.http.post(environment.apiSumWin, body)
+ sumAllwin(playerId: any): Observable<number> {
+  const body = { playerId };
+  return this.http.post(environment.apiSumWin, body, { responseType: 'text' }).pipe(
+    map(res => Number(res))
+  );
+}
+
+sumAllLose(playerId: any): Observable<number> {
+  const body = { playerId };
+  return this.http.post(environment.apiSumLose, body, { responseType: 'text' }).pipe(
+    map(res => Number(res))
+  );
+}
+
+sumRengWin(playerId: any): Observable<number> {
+  const body = { playerId };
+  return this.http.post(environment.apiRengWin, body, { responseType: 'text' }).pipe(
+    map(res => Number(res))
+  );
+}
+
+sumRengLose(playerId: any): Observable<number> {
+  const body = { playerId };
+  return this.http.post(environment.apiRengLose, body, { responseType: 'text' }).pipe(
+    map(res => Number(res))
+  );
+}
+
+sumClWin(playerId: any): Observable<number> {
+  const body = { playerId };
+  return this.http.post(environment.apiClWin, body, { responseType: 'text' }).pipe(
+    map(res => Number(res))
+  );
+}
+
+sumClLose(playerId: any): Observable<number> {
+  const body = { playerId };
+  return this.http.post(environment.apiClLose, body, { responseType: 'text' }).pipe(
+    map(res => Number(res))
+  );
+}
+sumBetRengWin(): Observable<number> {
+    return this.http.get(environment.apiBetRengWin, { responseType: 'text' }).pipe(
+      map(res => Number(res))
+    );
   }
 
-  sumAllLose(playerId: any) {
-    const body = {
-      playerId: playerId,
-    }
-    return this.http.post(environment.apiSumLose, body)
+  sumBetRengLose(): Observable<number> {
+    return this.http.get(environment.apiBetRengLose, { responseType: 'text' }).pipe(
+      map(res => Number(res))
+    );
   }
 
-  sumRengWin(playerId: any) {
-    const body = {
-      playerId: playerId,
-    }
-    return this.http.post(environment.apiRengWin, body)
+  sumBetTXWin(): Observable<number> {
+    return this.http.get(environment.apiBetTXWin, { responseType: 'text' }).pipe(
+      map(res => Number(res))
+    );
   }
 
-  sumRengLose(playerId: any) {
-    const body = {
-      playerId: playerId,
-    }
-    return this.http.post(environment.apiRengLose, body)
-  }
-
-  sumClWin(playerId: any) {
-    const body = {
-      playerId: playerId,
-    }
-    return this.http.post(environment.apiClWin, body)
-  }
-
-  sumClLose(playerId: any) {
-    const body = {
-      playerId: playerId,
-    }
-    return this.http.post(environment.apiClLose, body)
-  }
-  sumBetRengWin() {
-    
-    return this.http.get(environment.apiBetRengWin)
-  }
-  sumBetRengLose() {
-    return this.http.get(environment.apiBetRengLose)
-  }
-  sumBetTXWin() {
-    return this.http.get(environment.apiBetTXWin)
-  }
-  sumBetTXLose() {
-    return this.http.get(environment.apiBetTXLose)
+  sumBetTXLose(): Observable<number> {
+    return this.http.get(environment.apiBetTXLose, { responseType: 'text' }).pipe(
+      map(res => Number(res))
+    );
   }
  
   //add user

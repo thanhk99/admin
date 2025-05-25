@@ -42,7 +42,7 @@
                     <span></span>
                 </div>
             </div>
-            
+
         </div>
         <div class="statics-user card">
             <div class="head-user">
@@ -67,49 +67,57 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let user of users |  paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }"
-                        (click)="goToUser(user.id)" style="cursor:pointer;" [class.active]="isActive[user.id - 1]">
+                    <tr *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }"
+                        (click)="goToUser(user.id)" style="cursor:pointer;"
+                        [class.deleted]="isDeleted[user.id ]">   
+
                         <td>
                             <span *ngIf="!isEditing[user.id - 1]">{{user.id}}</span>
-                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.id"/>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.id" />
                         </td>
                         <td>
-                            <span *ngIf="!isEditing[user.id - 1]">{{user.fullname}}</span>
-                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.fullname" type="text" (click)="$event.stopPropagation()" />
+                            <span *ngIf="!isEditing[user.id - 1]"
+                                [title]="user.is_delete ? 'Đã xóa' : 'Đang hoạt động'">
+                                {{user.fullname}}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.fullname" type="text"
+                                (click)="$event.stopPropagation()" />
                         </td>
                         <td>
-                            <span *ngIf="!isEditing[user.id - 1]">{{user.email}}</span>
-                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.email" type="text" (click)="$event.stopPropagation()"/>
+                            <span *ngIf="!isEditing[user.id - 1]"
+                                [title]="user.is_delete ? 'Đã xóa' : 'Đang hoạt động'">
+                                {{user.email}}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.email" type="text"
+                                (click)="$event.stopPropagation()" />
                         </td>
                         <td>
                             <span *ngIf="!isEditing[user.id - 1]">{{user.datetime}}</span>
-                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.datetime" type="text" (click)="$event.stopPropagation()"/>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.datetime" type="text"
+                                (click)="$event.stopPropagation()" />
                         </td>
                         <td>
-                            <i (click)="toggleMenu(user.id - 1); $event.stopPropagation()" class="fa-solid fa-sliders"></i>
+                            <i (click)="toggleMenu(user.id - 1); $event.stopPropagation()"
+                                class="fa-solid fa-sliders"></i>
                             <div *ngIf="showMenu[user.id - 1]" class="dropdown-menu" (click)="$event.stopPropagation()">
-                                <div class="menu-item" (click)="editItem(user.id - 1)" (click)="$event.stopPropagation()">Chỉnh sửa</div>
-                                <div class="menu-item" (click)="deleteItem(user.id - 1)" (click)="$event.stopPropagation()">Xóa</div>
-                                <div class="menu-item" (click)="activeItem(user.id - 1)" (click)="$event.stopPropagation()">Khôi phục</div>
+                                <div class="menu-item" (click)="editItem(user.id - 1)"
+                                    (click)="$event.stopPropagation()">Chỉnh sửa</div>
+                                <div class="menu-item" (click)="deleteItem(user.id - 1)"
+                                    (click)="$event.stopPropagation()">Xóa</div>
+                                <div class="menu-item" (click)="activeItem(user.id - 1)"
+                                    (click)="$event.stopPropagation()">Khôi phục</div>
                             </div>
                             <div *ngIf="isEditing[user.id - 1]" (click)="$event.stopPropagation()">
                                 <button (click)="saveItem(user.id - 1); $event.stopPropagation()">Lưu</button>
                                 <button (click)="cancelEdit(user.id - 1); $event.stopPropagation()">Hủy</button>
                             </div>
-                          </td>
+                        </td>
                     </tr>
                 </tbody>
             </table>
             <div class="pagination-container">
-                <pagination-controls
-                  (pageChange)="currentPage = $event"
-                  previousLabel="Trước"
-                  nextLabel="Sau"
-                  [maxSize]="4"
-                  [directionLinks]="true"
-                  [autoHide]="true">
+                <pagination-controls (pageChange)="currentPage = $event" previousLabel="Trước" nextLabel="Sau"
+                    [maxSize]="4" [directionLinks]="true" [autoHide]="true">
                 </pagination-controls>
-              </div>
+            </div>
         </div>
     </div>
 </div>

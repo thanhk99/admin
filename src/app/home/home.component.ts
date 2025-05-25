@@ -16,10 +16,11 @@ export class HomeComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5; // Số lượng giao dịch mỗi trang
   totalPages: number = 1;
-  paginatedData:  { id: number, fullname: string, email: string, datetime: string }[] = [];
+  paginatedData: { id: number, fullname: string, email: string, datetime: string }[] = [];
   users: {
-    isActive: boolean; id: number, fullname: string, email: string, datetime: string 
-}[] = []
+    is_delete: any;
+    isActive: boolean; id: number, fullname: string, email: string, datetime: string
+  }[] = []
   rotuer: any;
   amountIncome: number = 0;
   amountUser: number = 0;
@@ -28,6 +29,8 @@ export class HomeComponent implements OnInit {
   loseR: number = 0;
   winT: number = 0;
   loseT: number = 0;
+  isDeleted: { [key: number]: boolean } = {};
+
 
   constructor(
     private adminService: AdminService,
@@ -37,31 +40,30 @@ export class HomeComponent implements OnInit {
   isActive: boolean[] = []; // Define the active state array
   isEditing: boolean[] = []; // Define the editing state array
   showMenu: boolean[] = []; // Define the menu visibility array
-
   ngOnInit(): void {
+    // Khởi tạo isEditing cho từng user nếu users đã có sẵn
     this.users.forEach(user => {
       this.isEditing[user.id] = false;
-
     });
+
     this.getSumLoseT();
     this.getSumWinT();
     this.getSumLose();
     this.getSumWin();
-    
-    if(isPlatformBrowser(this.platformId)){   
-      this.adminService.getFullUser().subscribe(
-        (data: any) => {
-          console.log('API trả về:', data);
-  
-          // Gán chính xác mảng users
-          this.users = Array.isArray(data) ? data : data.users;
-  
-          // Nếu vẫn không chắc chắn:
-          // this.users = Array.isArray(data.users) ? data.users : [data.users];
-        }
-      );
-    } 
+    this.loadUsers();
+
+
+
   }
+  loadUsers() {
+    this.adminService.getFullUser().subscribe((users: any) => {
+      this.users = users;
+      this.syncDeleteStatus();
+    });
+  }
+
+
+
 
   goToUser(id: number) {
     this.router.navigate(['/users', id]);
@@ -88,50 +90,56 @@ export class HomeComponent implements OnInit {
   }
 
 
-  deleteItem(index: number): void {
-    const user = this.users[index].id;
-    console.log('Xoá người dùng:', user);
+  // Đồng bộ trạng thái xóa từ localStorage
+  syncDeleteStatus() {
+    if (isPlatformBrowser(this.platformId)) {
+      const deletedUsers = JSON.parse(localStorage.getItem('deletedUsers') || '{}');
+      this.isDeleted = deletedUsers;
 
-    if (!user || !user) {
-      alert('Người dùng không hợp lệ.');
-      return;
-    }
-
-    if (confirm(`Bạn chắc chắn muốn xoá người dùng ID ${user}?`)) {
-      this.adminService.isDelete(user).subscribe(
-        (res : any) => {
-          console.log('Xoá thành công:', res);
-          alert('Xoá thành công!');
-          
-        },
-        (err : any) => {
-          console.error('Xảy ra lỗi khi xoá:', err);
-          alert('Không thể xoá người dùng!');
-        }
-      );
+      // Gán is_delete cho từng user
+      this.users.forEach(user => {
+        user.is_delete = this.isDeleted[user.id] || false;
+      });
     }
   }
+
+  deleteItem(index: number): void {
+    const user = this.users[index];
+    if (confirm(`Xoá user ${user.id}?`)) {
+      this.adminService.isDelete(user.id).subscribe(() => {
+        user.is_delete = true;
+        this.isDeleted[user.id] = true;
+
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('deletedUsers', JSON.stringify(this.isDeleted));
+        }
+      });
+    }
+  }
+  // In your activeItem method, update it like this:
   activeItem(index: number): void {
-    const user = this.users[index].id;
-    console.log('Kích hoạt người dùng:', user);
-    if (!user || !user) {
+    const user = this.users[index];
+    console.log('Kích hoạt người dùng:', user.id);
+    if (!user || !user.id) {
       alert('Người dùng không hợp lệ.');
       return;
     }
-    if (confirm(`Bạn chắc chắn muốn kích hoạt người dùng ID ${user}?`)) {
-      this.adminService.isActive(user).subscribe(
-        (res : any) => {
+    if (confirm(`Bạn chắc chắn muốn kích hoạt người dùng ID ${user.id}?`)) {
+      this.adminService.isActive(user.id).subscribe(
+        (res: any) => {
           console.log('Kích hoạt thành công:', res);
+          this.isDeleted[user.id] = false; // Update isDeleted state
+          user.is_delete = false; // Update user object
           alert('Kích hoạt thành công!');
+          // No need to reload users, we're updating the state directly
         },
-        (err : any) => {
+        (err: any) => {
           console.error('Xảy ra lỗi khi kích hoạt:', err);
           alert('Không thể kích hoạt người dùng!');
         }
       );
     }
   }
-
 
   saveItem(index: number): void {
     const id = this.users[index].id;
@@ -142,7 +150,7 @@ export class HomeComponent implements OnInit {
       fullname: user.fullname,
       email: user.email
     });
-    
+
 
     // Gửi object user trực tiếp (gồm id, fullname, email)
     this.adminService.updateUser(
