@@ -1,12 +1,13 @@
-const IP='127.0.0.1'
+const IP = '127.0.0.1'
 export const environment = {
-    production:true,
-    apiGetUsers:`http://${IP}:8082/user`,
+    production: true,
+    apiGetUsers: `http://${IP}:8082/user`,
     apiGetAtmUser: `http://${IP}:8082/Atm/get`,
     apiGetFullUser: `http://${IP}:8082/admin/allUsers`,
     apiGetInfoUser: `http://${IP}:8082/user/info`,
     apiUpdateUser: `http://${IP}:8082/admin/update`,
     apiDeleteUser: `http://${IP}:8082/admin/delete`,
+    apiGetHistoryGame: `http://${IP}:8082/game/getHistoryCl`,
     apiUpdateAtmUser: `http://${IP}:8082/admin/updateBalan`,
     apiUpdateTKMK: `http://${IP}:8082/admin/updateTkMK`,
     apiSumWin: `http://${IP}:8082/admin/totalMoney`,
@@ -15,6 +16,13 @@ export const environment = {
     apiRengLose: `http://${IP}:8082/admin/totalLostGame`,
     apiClWin: `http://${IP}:8082/admin/totalMoneyCL`,
     apiClLose: `http://${IP}:8082/admin/totalLostCL`,
+    apiBetRengWin: `http://${IP}:8082/admin/getSumBetRengWin`,
+    apiBetRengLose: `http://${IP}:8082/admin/getSumBetRengLose`,
+    apiBetTXWin: `http://${IP}:8082/admin/getSumBetCLWin`,
+    apiBetTXLose: `http://${IP}:8082/admin/getSumBetCLLose`,
     apiAddUser: `http://${IP}:8082/admin/addUser`,
     apiAddAtmUser: `http://${IP}:8082/admin/registerAtm`,
+    apiIsDelete: `http://${IP}:8082/admin/delete`,
+    apiIsActive: `http://${IP}:8082/admin/restore`,
+
 };

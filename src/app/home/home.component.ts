@@ -17,11 +17,17 @@ export class HomeComponent implements OnInit {
   itemsPerPage: number = 5; // Số lượng giao dịch mỗi trang
   totalPages: number = 1;
   paginatedData:  { id: number, fullname: string, email: string, datetime: string }[] = [];
-  users: { id: number, fullname: string, email: string, datetime: string }[] = []
+  users: {
+    isActive: boolean; id: number, fullname: string, email: string, datetime: string 
+}[] = []
   rotuer: any;
   amountIncome: number = 0;
   amountUser: number = 0;
   http: any;
+  winR: number = 0;
+  loseR: number = 0;
+  winT: number = 0;
+  loseT: number = 0;
 
   constructor(
     private adminService: AdminService,
@@ -35,7 +41,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.users.forEach(user => {
       this.isEditing[user.id] = false;
+
     });
+    this.getSumLoseT();
+    this.getSumWinT();
+    this.getSumLose();
+    this.getSumWin();
     
     if(isPlatformBrowser(this.platformId)){   
       this.adminService.getFullUser().subscribe(
@@ -87,14 +98,35 @@ export class HomeComponent implements OnInit {
     }
 
     if (confirm(`Bạn chắc chắn muốn xoá người dùng ID ${user}?`)) {
-      this.adminService.deleteUser(user).subscribe(
-        (res) => {
+      this.adminService.isDelete(user).subscribe(
+        (res : any) => {
           console.log('Xoá thành công:', res);
-          this.users.splice(index, 1); // Cập nhật UI
+          alert('Xoá thành công!');
+          
         },
-        (err) => {
+        (err : any) => {
           console.error('Xảy ra lỗi khi xoá:', err);
           alert('Không thể xoá người dùng!');
+        }
+      );
+    }
+  }
+  activeItem(index: number): void {
+    const user = this.users[index].id;
+    console.log('Kích hoạt người dùng:', user);
+    if (!user || !user) {
+      alert('Người dùng không hợp lệ.');
+      return;
+    }
+    if (confirm(`Bạn chắc chắn muốn kích hoạt người dùng ID ${user}?`)) {
+      this.adminService.isActive(user).subscribe(
+        (res : any) => {
+          console.log('Kích hoạt thành công:', res);
+          alert('Kích hoạt thành công!');
+        },
+        (err : any) => {
+          console.error('Xảy ra lỗi khi kích hoạt:', err);
+          alert('Không thể kích hoạt người dùng!');
         }
       );
     }
@@ -135,28 +167,48 @@ export class HomeComponent implements OnInit {
     this.isEditing[index] = false;
   }
 
-  // updatePagination() {
-  //   this.showMenu = new Array(this.users.length).fill(false);
-  //   this.isActive = new Array(this.users.length).fill(false);
-  //   this.isEditing = new Array(this.users.length).fill(false);
-
-  //   this.totalPages = Math.ceil(this.users.length / this.itemsPerPage);
-  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-  //   const endIndex = startIndex + this.itemsPerPage;
-  //   this.paginatedData = this.users.slice(startIndex, endIndex);
-  // }
-  // previousPage() {
-  //   if (this.currentPage > 1) {
-  //     this.currentPage--;
-  //     this.updatePagination();
-  //   }
-  // }
-
-  // // Chuyển sang trang tiếp theo
-  // nextPage() {
-  //   if (this.currentPage < this.totalPages) {
-  //     this.currentPage++;
-  //     this.updatePagination();
-  //   }
-  // }
+  getSumWin() {
+    this.adminService.sumBetRengWin().subscribe(
+      (data: any) => {
+        this.winR = data;
+        console.log('Tổng tiền thắng:', this.winR);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thắng:', error);
+      }
+    );
+  }
+  getSumLose() {
+    this.adminService.sumBetRengLose().subscribe(
+      (data: any) => {
+        this.loseR = data;
+        console.log('Tổng tiền thua:', this.loseR);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thua:', error);
+      }
+    );
+  }
+  getSumWinT() {
+    this.adminService.sumBetTXWin().subscribe(
+      (data: any) => {
+        this.winT = data;
+        console.log('Tổng tiền thắng:', this.winT);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thắng:', error);
+      }
+    );
+  }
+  getSumLoseT() {
+    this.adminService.sumBetTXLose().subscribe(
+      (data: any) => {
+        this.loseT = data;
+        console.log('Tổng tiền thua:', this.loseT);
+      },
+      (error: any) => {
+        console.error('Lỗi khi lấy tổng tiền thua:', error);
+      }
+    );
+  }
 }

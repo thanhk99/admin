@@ -24,4 +24,7 @@ export class SideLeftComponent {
     this.cookieService.deleteAll()
     this.router.navigate(["/login"])
   }
+  GamePage(){
+    this.router.navigate(['/game'])
+  }
 }

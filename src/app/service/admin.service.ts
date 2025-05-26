@@ -1,5 +1,5 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -8,7 +8,9 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AdminService {
-  private apidelete = environment.apiDeleteUser;
+  private apidelete= environment.apiDeleteUser;
+  private apihistorycl = environment.apiGetHistoryGame;
+
 
   constructor(
     private http: HttpClient,
@@ -52,10 +54,10 @@ export class AdminService {
     }
     return this.http.post(environment.apiGetAtmUser, body)
   }
-  // lấy ra tất cả usẻ
-  getFullUser() {
-    const body = {}
-    return this.http.post(environment.apiGetFullUser, body)
+  // lấy ra tất cả user
+  getFullUser(){
+    const body={}
+    return this.http.post(environment.apiGetFullUser , body)
   }
 
   //update user
@@ -137,7 +139,20 @@ export class AdminService {
     }
     return this.http.post(environment.apiClLose, body)
   }
-
+  sumBetRengWin() {
+    
+    return this.http.get(environment.apiBetRengWin)
+  }
+  sumBetRengLose() {
+    return this.http.get(environment.apiBetRengLose)
+  }
+  sumBetTXWin() {
+    return this.http.get(environment.apiBetTXWin)
+  }
+  sumBetTXLose() {
+    return this.http.get(environment.apiBetTXLose)
+  }
+ 
   //add user
   addUser(tk: any, mk: any, fullname: any, email: any , role: any) {
     const body = {
@@ -170,5 +185,23 @@ export class AdminService {
   }
   getCookiedName() {
     return this.cookieService.get('name')
+  }
+
+  getTaiXiuHistory(): Observable<any[]> {
+    return this.http.post<any[]>(environment.apiGetHistoryGame, {
+      namegame: 'Tài xỉu'
+    });
+  }
+  isDelete(id: any) {
+    const body = {
+      id: id
+    }
+    return this.http.put(environment.apiIsDelete, body)
+  }
+  isActive(id: any) {
+    const body = {
+      id: id
+    }
+    return this.http.put(environment.apiIsActive, body)
   }
 }
