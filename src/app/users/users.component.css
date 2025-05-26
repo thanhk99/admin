@@ -34,17 +34,21 @@
   text-align: center;
 }
 
-.btn-add {
-  background-color: #007bff;
+.btn-add , .btn-delete , .btn-restore {
+  /* background-color: #007bff; */
+  padding: 8px 12px;
+  border-radius: 6px;
   color: white;
-  padding: 10px 15px;
-  border-radius: 10px;
   cursor: pointer;
-  font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-left: 50vh;
+  gap: 5px;
+  font-weight: bold;
+  width: fit-content;
+}
+.btn-add {
+  background-color: #007bff; /* Màu nền nút thêm */
+
 }
 .btn-add:hover {
   background-color: #0056b3;
@@ -57,6 +61,35 @@
   outline: none;
   box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.5);
 }
+.btn-delete {
+  background-color: #dc3545; /* Màu nền nút xóa */
+}
+.btn-delete:hover {
+  background-color: #c82333;
+}
+.btn-delete:active {
+  background-color: #c82333;
+  transform: scale(0.98); /* Tạo hiệu ứng nhấn nút */
+}
+.btn-delete:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.5);
+}
+.btn-restore {
+  background-color: #28a745; /* Màu nền nút khôi phục */
+}
+.btn-restore:hover {
+  background-color: #218838;
+}
+.btn-restore:active {
+  background-color: #218838;
+  transform: scale(0.98); /* Tạo hiệu ứng nhấn nút */
+}
+.btn-restore:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.5);
+}
+
 /* Hồ sơ người dùng */
 .box-profile {
   display: flex;
@@ -128,10 +161,31 @@
 .account-info {
   flex: 1;
 }
+.status-icon-active {
+  color: #28a745; /* Xanh lá */
+  font-size: 10px;
+  margin-right: 6px;
+}
+
+.status-icon-deleted {
+  color: #dc3545; /* Đỏ */
+  font-size: 10px;
+  margin-right: 6px;
+}
+
+.account-status {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+
 
 .inputTk,
 .inputMK,
-.inputMoney {
+.inputMoney,
+.inputEmail {
   width: 100%;
   padding: 6px;
   border-radius: 6px;
