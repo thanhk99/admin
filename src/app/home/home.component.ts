@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   totalPages: number = 1;
   paginatedData: { id: number, fullname: string, email: string, datetime: string }[] = [];
   users: {
-    is_delete: any;
+    is_delete: boolean;
     isActive: boolean; id: number, fullname: string, email: string, datetime: string
   }[] = []
   rotuer: any;
@@ -57,8 +57,13 @@ export class HomeComponent implements OnInit {
   }
   loadUsers() {
     this.adminService.getFullUser().subscribe((users: any) => {
-      this.users = users;
-      this.syncDeleteStatus();
+    this.users = users.map((user: any) => {
+      return {
+        ...user,
+        is_delete: !!user.isDelete
+      };
+    });
+      this.isEditing = new Array(this.users.length).fill(false); 
     });
   }
 
@@ -67,7 +72,6 @@ export class HomeComponent implements OnInit {
 
   goToUser(id: number) {
     this.router.navigate(['/users', id]);
-    console.log("Id duoc gui di :", id);
   }
 
 
@@ -87,20 +91,6 @@ export class HomeComponent implements OnInit {
 
   editItem(index: number): void {
     this.isEditing[index] = true;
-  }
-
-
-  // Đồng bộ trạng thái xóa từ localStorage
-  syncDeleteStatus() {
-    if (isPlatformBrowser(this.platformId)) {
-      const deletedUsers = JSON.parse(localStorage.getItem('deletedUsers') || '{}');
-      this.isDeleted = deletedUsers;
-
-      // Gán is_delete cho từng user
-      this.users.forEach(user => {
-        user.is_delete = this.isDeleted[user.id] || false;
-      });
-    }
   }
 
   deleteItem(index: number): void {
@@ -201,7 +191,6 @@ export class HomeComponent implements OnInit {
     this.adminService.sumBetTXWin().subscribe(
       (data: any) => {
         this.winT = data;
-        console.log('Tổng tiền thắng:', this.winT);
       },
       (error: any) => {
         console.error('Lỗi khi lấy tổng tiền thắng:', error);
@@ -212,7 +201,6 @@ export class HomeComponent implements OnInit {
     this.adminService.sumBetTXLose().subscribe(
       (data: any) => {
         this.loseT = data;
-        console.log('Tổng tiền thua:', this.loseT);
       },
       (error: any) => {
         console.error('Lỗi khi lấy tổng tiền thua:', error);

@@ -61,7 +61,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>DateTime</th>
+                        <th>Trang thái</th>
                         <th>Edit</th>
                         <td><i class="fa-solid fa-trash"></i></td>
                     </tr>
@@ -69,7 +69,7 @@
                 <tbody>
                     <tr *ngFor="let user of users | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }"
                         (click)="goToUser(user.id)" style="cursor:pointer;"
-                        [class.deleted]="isDeleted[user.id ]">   
+                        [class.deleted]=user.is_delete>   
 
                         <td>
                             <span *ngIf="!isEditing[user.id - 1]">{{user.id}}</span>
@@ -90,8 +90,8 @@
                                 (click)="$event.stopPropagation()" />
                         </td>
                         <td>
-                            <span *ngIf="!isEditing[user.id - 1]">{{user.datetime}}</span>
-                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.datetime" type="text"
+                            <span *ngIf="!isEditing[user.id - 1]">{{ user.is_delete ? 'Đã xóa' : 'Chưa xóa' }}</span>
+                            <input *ngIf="isEditing[user.id - 1]" [(ngModel)]="user.is_delete" type="text"
                                 (click)="$event.stopPropagation()" />
                         </td>
                         <td>
